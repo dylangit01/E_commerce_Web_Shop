@@ -4,8 +4,8 @@ import useStyles from './styles';
 import Product from '../Product/Product'
 
 const products = [
-	{id: 1, name: 'Shoes', description: 'Running shoes'},
-	{id: 2, name: 'Macbook Pro', description: 'Apple macbook'},
+	{id: 1, name: 'Shoes', description: 'Running shoes', price: '$150'},
+	{id: 2, name: 'Macbook Pro', description: 'Apple macbook', price: '$2999'},
 ]
 
 const Products = () => {
@@ -15,7 +15,7 @@ const Products = () => {
 			<Grid container justifyContent='center' spacing={4}>
 				{products.map((product) => (
 					<Grid item key={product.id} xs={12} md={4} lg={3}>
-						<Product />
+						<Product product ={product} />
 					</Grid>
 				))}
 			</Grid>
