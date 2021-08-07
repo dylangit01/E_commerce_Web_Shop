@@ -7,20 +7,21 @@ const Product = ({ product }) => {
 	const classes = useStyles();
 	return (
 		<Card className={classes.root}>
-			<CardMedia className={classes.media} image='' title={product.name} />
+			<CardMedia
+				className={classes.media}
+				image={product.image || 'https://www.incimages.com/uploaded_files/image/1920x1080/getty_663974538_353364.jpg'}
+				title={product.name}
+			/>
 			<CardContent>
 				<div className={classes.CardContent}>
-					<Typography variant='h5' gutterBottom>
-						{product.name}
-					</Typography>
-					<Typography variant='h5'>
-						{product.price}
-					</Typography>
+					<Typography variant='h6' gutterBottom> {product.name} </Typography>
+					<Typography variant='h6'>{product.price}</Typography>
 				</div>
-				<Typography variant='h2' color='textSecondary'>{product.description}</Typography>
+				<Typography variant='body2' color='textSecondary'> {product.description} </Typography>
 			</CardContent>
 			<CardActions disableSpacing className={classes.cardActions}>
-				{/* For someone cannot see the button of the screen */}
+
+				{/* aria-label is for someone cannot see the button of the screen */}
 				<IconButton aria-label='Add to Card'>
 					<AddShoppingCart />
 				</IconButton>
