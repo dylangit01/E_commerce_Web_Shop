@@ -24,7 +24,8 @@ const products = [
 const Products = () => {
 	const classes = useStyles();
 	return (
-		<main>
+		<main className={classes.content}>
+			<div className={classes.toolbar} />
 			<Grid container justifyContent='center' spacing={4}>
 				{products.map((product) => (
 					<Grid item key={product.id} xs={12} md={4} lg={3}>
