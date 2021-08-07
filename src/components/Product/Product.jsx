@@ -5,19 +5,22 @@ import useStyles from './styles';
 
 const Product = ({ product }) => {
 	const classes = useStyles();
+
 	return (
 		<Card className={classes.root}>
 			<CardMedia
 				className={classes.media}
-				image={product.image || 'https://www.incimages.com/uploaded_files/image/1920x1080/getty_663974538_353364.jpg'}
+				image={product.media.source || 'https://www.incimages.com/uploaded_files/image/1920x1080/getty_663974538_353364.jpg'}
 				title={product.name}
 			/>
 			<CardContent>
 				<div className={classes.CardContent}>
 					<Typography variant='h6' gutterBottom> {product.name} </Typography>
-					<Typography variant='h6'>{product.price}</Typography>
+					<Typography variant='h6'>{product.price.formatted_with_symbol}</Typography>
 				</div>
-				<Typography variant='body2' color='textSecondary'> {product.description} </Typography>
+				<Typography dangerouslySetInnerHTML={{
+					__html: product.description
+				}} variant='body2' color='textSecondary'/>
 			</CardContent>
 			<CardActions disableSpacing className={classes.cardActions}>
 

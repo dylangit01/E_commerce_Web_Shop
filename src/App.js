@@ -10,6 +10,7 @@ const App = () => {
 		const { data } = await commerce.products.list();
 		setProducts(data)
 	}
+	console.log(products);
 
 	useEffect(() => {
 		fetchProducts();
@@ -18,7 +19,7 @@ const App = () => {
 	return (
 		<div>
 			<Navbar />
-			<Products />
+			<Products products={products} />
 		</div>
 	)
 }
