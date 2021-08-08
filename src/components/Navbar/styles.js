@@ -17,10 +17,6 @@ export default makeStyles((theme) => ({
 		display: 'flex',
 		textDecoration: 'none',
 	},
-	logoImg: {
-		display: 'flex',
-		alignItems: 'center'
-	},
 	image: {
 		marginRight: '10px',
 	},
