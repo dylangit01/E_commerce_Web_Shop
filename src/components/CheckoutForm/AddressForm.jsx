@@ -68,8 +68,7 @@ const AddressForm = ({ checkoutToken, next }) => {
 			</Typography>
 			<FormProvider {...methods}>
 				{/* The submit data needs to be received to Checkout component */}
-				<form
-					onSubmit={methods.handleSubmit((data) =>
+				<form onSubmit={methods.handleSubmit((data) =>
 						next({ ...data, shippingCountry, shippingSubdivision, shippingOption })
 					)}
 				>

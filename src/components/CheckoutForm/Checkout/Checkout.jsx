@@ -42,8 +42,7 @@ const Checkout = ({ cart, onCaptureCheckout, order, error }) => {
 		nextStep();
 	};
 
-	let Confirmation = () =>
-		order.customer ? (
+	let Confirmation = () => ( order.customer ? (
 			<>
 				<div>
 					<Typography variant='h5'>
@@ -61,7 +60,7 @@ const Checkout = ({ cart, onCaptureCheckout, order, error }) => {
 			<div className={classes.spinner}>
 				<CircularProgress />
 			</div>
-		);
+		));
 
 	if (error) {
 		Confirmation = () => (
