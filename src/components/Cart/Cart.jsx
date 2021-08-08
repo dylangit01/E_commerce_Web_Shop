@@ -1,6 +1,7 @@
 import React from 'react';
 import { Container, Typography, Button, Grid, CircularProgress } from '@material-ui/core';
 import useStyles from './styles';
+import CartItem from './CartItem/CartItem'
 
 const Cart = ({ cart }) => {
 	const classes = useStyles();
@@ -14,7 +15,7 @@ const Cart = ({ cart }) => {
 				{console.log(cart)}
 				{cart.line_items.map((item) => (
 					<Grid item xs={12} sm={4} key={item.id}>
-						<div>{item.name}</div>
+						<CartItem item={item} />
 					</Grid>
 				))}
 			</Grid>
@@ -36,7 +37,7 @@ const Cart = ({ cart }) => {
 	// When first time into Cart component, it will show 'Cannot read property 'length' of undefined', it means it doesn't fetch the cart line_items yet. In order to solve this, either add "?" after cart or add return 'Loading...' when cart.line_items doesn't exist
 	
 	// if (!cart.line_items) return 'Loading...';
-	
+
 	return (
 		<>
 			{!cart.line_items ? (
