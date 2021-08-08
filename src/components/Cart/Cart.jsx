@@ -42,7 +42,7 @@ const Cart = ({ cart }) => {
 		<>
 			{!cart.line_items ? (
 				<div className={classes.circularProcess}>
-					<CircularProgress />
+					<CircularProgress size='5em' />
 				</div>
 			) : (
 				<Container>

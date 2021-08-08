@@ -10,4 +10,9 @@ export default makeStyles((theme) => ({
 	root: {
 		flexGrow: 1,
 	},
+	circularProcess: {
+		paddingTop: '300px',
+		display: 'flex',
+		justifyContent: 'center',
+	},
 }));
