@@ -23,7 +23,6 @@ import Product from '../Product/Product';
 
 const Products = ({ products, onAddToCart }) => {
 	const classes = useStyles();
-	console.log(products);
 	return (
 		<>
 			{!products.length ? (
