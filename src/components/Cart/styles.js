@@ -26,4 +26,10 @@ export default makeStyles((theme) => ({
 		width: '100%',
 		justifyContent: 'space-between',
 	},
+	circularProcess: {
+		paddingTop: '200px',
+		height: '400px',
+		display: 'flex',
+		justifyContent: 'center',
+	},
 }));
