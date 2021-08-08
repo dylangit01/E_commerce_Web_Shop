@@ -22,12 +22,11 @@ const steps = ['Shipping address', 'Payment details'];
 const Checkout = ({ cart, onCaptureCheckout, order, error }) => {
 	const [checkoutToken, setCheckoutToken] = useState(null);
 	const [activeStep, setActiveStep] = useState(0);
-	// const [shippingData, setShippingData] = useState({});
+
+	const [shippingData, setShippingData] = useState({});
+
 	const classes = useStyles();
 	const history = useHistory();
-
-	// const nextStep = () => setActiveStep((prevActiveStep) => prevActiveStep + 1);
-	// const backStep = () => setActiveStep((prevActiveStep) => prevActiveStep - 1);
 
 	// Whenever someone clicks the checkout button, it will generate a checkoutToken:
 	useEffect(() => {
@@ -45,11 +44,13 @@ const Checkout = ({ cart, onCaptureCheckout, order, error }) => {
 		}
 	}, [cart]);
 
-	// const test = (data) => {
-	// 	setShippingData(data);
+	const nextStep = () => setActiveStep((prevActiveStep) => prevActiveStep + 1);
+	const backStep = () => setActiveStep((prevActiveStep) => prevActiveStep - 1);
 
-	// 	nextStep();
-	// };
+	const next = (data) => {
+		setShippingData(data);
+		nextStep();
+	};
 
 	const Confirmation = () => <div>Confirmation</div>;
 
@@ -93,14 +94,14 @@ const Checkout = ({ cart, onCaptureCheckout, order, error }) => {
 				checkoutToken={checkoutToken}
 				// nextStep={nextStep}
 				// setShippingData={setShippingData}
-				// test={test}
+				next={next}
 			/>
 		) : (
 			<PaymentForm
 			// checkoutToken={checkoutToken}
 			// nextStep={nextStep}
 			// backStep={backStep}
-			// shippingData={shippingData}
+			shippingData={shippingData}
 			// onCaptureCheckout={onCaptureCheckout}
 			/>
 		);

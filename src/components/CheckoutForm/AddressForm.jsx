@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 import { commerce } from '../../lib/commerce';
 import FormInput from './CustomTextField';
 
-const AddressForm = ({ checkoutToken }) => {
+const AddressForm = ({ checkoutToken, next }) => {
 	const methods = useForm();
 
 	const [shippingCountries, setShippingCountries] = useState([]);
@@ -49,7 +49,7 @@ const AddressForm = ({ checkoutToken }) => {
 	// Fetch countries first:
 	useEffect(() => {
 		fetchShippingCountries(checkoutToken.id);
-	}, []);
+	}, [checkoutToken.id]);
 
 	// Only when we got the country, then fetch the subdivisions
 	useEffect(() => {
@@ -59,7 +59,7 @@ const AddressForm = ({ checkoutToken }) => {
 	// Only when we got the shippingSubdivision, then fetch the shipping options
 	useEffect(() => {
 		if (shippingSubdivision) fetchShippingOptions(checkoutToken.id, shippingCountry, shippingSubdivision);
-	}, [shippingSubdivision]);
+	}, [shippingSubdivision, checkoutToken.id, shippingCountry]);
 
 	return (
 		<>
@@ -67,14 +67,17 @@ const AddressForm = ({ checkoutToken }) => {
 				Shipping Address
 			</Typography>
 			<FormProvider {...methods}>
-				<form onSubmit={() => {}}>
+				{/* The submit data needs to be received to Checkout component */}
+				<form
+					onSubmit={methods.handleSubmit((data) =>
+						next({ ...data, shippingCountry, shippingSubdivision, shippingOption })
+					)}
+				>
 					<Grid container spacing={3}>
 						<FormInput name='firstName' label='First name' />
 						<FormInput name='lastName' label='Last name' />
 						<FormInput name='address1' label='Address line 1' />
 						<FormInput name='email' label='Email' />
-						{/* <FormInput name="country" label="Country" />
-            <FormInput name="state" label="State" /> */}
 						<FormInput name='city' label='City' />
 						<FormInput name='zip' label='Zip / Postal code' />
 
@@ -90,7 +93,7 @@ const AddressForm = ({ checkoutToken }) => {
 						</Grid>
 
 						<Grid item xs={12} sm={6}>
-							<InputLabel>Shipping Subdivision</InputLabel>
+							<InputLabel>Shipping State</InputLabel>
 							<Select value={shippingSubdivision} fullWidth onChange={(e) => setShippingSubdivision(e.target.value)}>
 								{subdivisionsArr.map(({ id, label }) => (
 									<MenuItem key={id} value={id}>
@@ -111,6 +114,15 @@ const AddressForm = ({ checkoutToken }) => {
 							</Select>
 						</Grid>
 					</Grid>
+					<br />
+					<div style={{ display: 'flex', justifyContent: 'space-between' }}>
+						<Button component={Link} variant='outlined' to='/cart'>
+							Back to Cart
+						</Button>
+						<Button type='submit' variant='contained' color='primary'>
+							Next
+						</Button>
+					</div>
 				</form>
 			</FormProvider>
 		</>
