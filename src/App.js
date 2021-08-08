@@ -4,7 +4,7 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { commerce } from './lib/commerce';
 
 const App = () => {
-	const [mobileOpen, setMobileOpen] = useState(false);
+	// const [mobileOpen, setMobileOpen] = useState(false);
 	const [products, setProducts] = useState([]);
 	const [cart, setCart] = useState({});
 	const [order, setOrder] = useState({});

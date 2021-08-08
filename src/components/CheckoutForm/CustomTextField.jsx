@@ -7,9 +7,11 @@ function FormInput({ name, label }) {
 	const isError = false;
 
 	// react-hook-form now requires a render props
+	// In order to solve "Warning: A component is changing an uncontrolled input", add defaultValue=''
 	return (
 		<Grid item xs={12} sm={6}>
 			<Controller
+				defaultValue=''
 				control={control}
 				render={({ field }) => <TextField fullWidth {...field} label={label} required />}
 				name={name}

@@ -32,7 +32,7 @@ const Checkout = ({ cart, onCaptureCheckout, order, error }) => {
 
 			generateToken();
 		}
-	}, [cart]);
+	}, [cart, activeStep, history]);
 
 	const nextStep = () => setActiveStep((prevActiveStep) => prevActiveStep + 1);
 	const backStep = () => setActiveStep((prevActiveStep) => prevActiveStep - 1);
@@ -42,40 +42,38 @@ const Checkout = ({ cart, onCaptureCheckout, order, error }) => {
 		nextStep();
 	};
 
-	const Confirmation = () => <div>Confirmation</div>;
+	let Confirmation = () =>
+		order.customer ? (
+			<>
+				<div>
+					<Typography variant='h5'>
+						Thank you for your purchase, {order.customer.firstname} {order.customer.lastname}!
+					</Typography>
+					<Divider className={classes.divider} />
+					<Typography variant='subtitle2'>Order ref: {order.customer_reference}</Typography>
+				</div>
+				<br />
+				<Button component={Link} variant='outlined' type='button' to='/'>
+					Back to home
+				</Button>
+			</>
+		) : (
+			<div className={classes.spinner}>
+				<CircularProgress />
+			</div>
+		);
 
-	// let Confirmation = () =>
-	// 	order.customer ? (
-	// 		<>
-	// 			<div>
-	// 				<Typography variant='h5'>
-	// 					Thank you for your purchase, {order.customer.firstname} {order.customer.lastname}!
-	// 				</Typography>
-	// 				<Divider className={classes.divider} />
-	// 				<Typography variant='subtitle2'>Order ref: {order.customer_reference}</Typography>
-	// 			</div>
-	// 			<br />
-	// 			<Button component={Link} variant='outlined' type='button' to='/'>
-	// 				Back to home
-	// 			</Button>
-	// 		</>
-	// 	) : (
-	// 		<div className={classes.spinner}>
-	// 			<CircularProgress />
-	// 		</div>
-	// 	);
-
-	// if (error) {
-	// 	Confirmation = () => (
-	// 		<>
-	// 			<Typography variant='h5'>Error: {error}</Typography>
-	// 			<br />
-	// 			<Button component={Link} variant='outlined' type='button' to='/'>
-	// 				Back to home
-	// 			</Button>
-	// 		</>
-	// 	);
-	// }
+	if (error) {
+		Confirmation = () => (
+			<>
+				<Typography variant='h5'>Error: {error}</Typography>
+				<br />
+				<Button component={Link} variant='outlined' type='button' to='/'>
+					Back to home
+				</Button>
+			</>
+		);
+	}
 
 	// Only when we have checkoutToken, then render Form component
 	const Form = () =>
@@ -88,23 +86,22 @@ const Checkout = ({ cart, onCaptureCheckout, order, error }) => {
 			/>
 		) : (
 			<PaymentForm
-			checkoutToken={checkoutToken}
-			shippingData={shippingData}
-			nextStep={nextStep}
-			backStep={backStep}
-			onCaptureCheckout={onCaptureCheckout}
+				checkoutToken={checkoutToken}
+				shippingData={shippingData}
+				nextStep={nextStep}
+				backStep={backStep}
+				onCaptureCheckout={onCaptureCheckout}
 			/>
 		);
 
 	return (
 		<>
-			{/* <CssBaseline /> */}
+			<CssBaseline />
 			<div className={classes.toolbar} />
 			<main className={classes.layout}>
 				<Paper className={classes.paper}>
 					<Typography variant='h4' align='center'>
-						{' '}
-						Checkout{' '}
+						Checkout
 					</Typography>
 					<Stepper activeStep={activeStep} className={classes.stepper}>
 						{steps.map((label) => (
