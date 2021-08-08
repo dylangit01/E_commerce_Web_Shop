@@ -11,17 +11,16 @@ const AddressForm = () => {
 
 	return (
 		<>
-			<Typography variant='h6' gutterBottom>Shipping Address</Typography>
+			<Typography variant='h6' gutterBottom> Shipping Address </Typography>
 			<FormProvider {...methods}>
-				<form onSubmit={()=>{} }>
+				<form onSubmit={() => {}}>
 					<Grid container spacing={3}>
-
+						<FormInput required name='firstName' label='First name' />
 					</Grid>
 				</form>
-
 			</FormProvider>
 		</>
-	)
+	);
 }
 
 export default AddressForm
