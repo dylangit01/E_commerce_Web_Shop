@@ -19,6 +19,7 @@ export default makeStyles((theme) => ({
 	},
 	link: {
 		textDecoration: 'none',
+		color: '#dd3333'
 	},
 	cardDetails: {
 		display: 'flex',

@@ -4,30 +4,36 @@ import useStyles from './styles';
 import CartItem from './CartItem/CartItem';
 import { Link } from 'react-router-dom';
 
-const Cart = ({ cart }) => {
+const Cart = ({ cart, onUpdateCartQty, onRemoveFromCart, onEmptyCart }) => {
 	const classes = useStyles();
 
 	// Has to return the JSX file
 	const EmptyCart = () => (
 		<Typography variant='subtitle1'>You shopping cart is empty, 
-			<Link to='/' className={classes.link} >start adding some</Link>!
+			<Link to='/' className={classes.link} > start adding some</Link>!
 		</Typography>
 	);
 
 	const FilledCart = () => (
 		<>
 			<Grid container spacing={3}>
-				{console.log(cart)}
 				{cart.line_items.map((item) => (
 					<Grid item xs={12} sm={4} key={item.id}>
-						<CartItem item={item} />
+						<CartItem onUpdateCartQty={onUpdateCartQty} onRemoveFromCart={onRemoveFromCart} item={item} />
 					</Grid>
 				))}
 			</Grid>
 			<div className={classes.cardDetails}>
 				<Typography>Subtotal: {cart.subtotal.formatted_with_symbol}</Typography>
 				<div>
-					<Button variant='contained' className={classes.emptyButton} size='large' type='button' color='secondary'>
+					<Button
+						variant='contained'
+						className={classes.emptyButton}
+						size='large'
+						type='button'
+						color='secondary'
+						onClick={onEmptyCart}
+					>
 						Empty Cart
 					</Button>
 					<Button variant='contained' className={classes.checkout} size='large' type='button' color='primary'>
