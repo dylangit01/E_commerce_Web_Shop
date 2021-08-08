@@ -1,11 +1,12 @@
 import React from 'react';
-import { useForm, Controller } from 'react-hook-form';
+import { useFormContext, Controller } from 'react-hook-form';
 import { TextField, Grid } from '@material-ui/core';
 
 function FormInput({ name, label, required }) {
-	const { control } = useForm();
+	const { control } = useFormContext();
 	const isError = false;
 
+	// react-hook-form now requires a render props
 	return (
 		<Grid item xs={12} sm={6}>
 			<Controller
