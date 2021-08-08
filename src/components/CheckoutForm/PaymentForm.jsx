@@ -5,9 +5,11 @@ import { loadStripe } from '@stripe/stripe-js';
 
 import Review from './Review';
 
+// Restart the yarn to load the key:
 const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_PUBLIC_KEY);
 
 const PaymentForm = ({ checkoutToken, nextStep, backStep, shippingData, onCaptureCheckout }) => {
+
 	const handleSubmit = async (event, elements, stripe) => {
 		event.preventDefault();
 
@@ -22,6 +24,7 @@ const PaymentForm = ({ checkoutToken, nextStep, backStep, shippingData, onCaptur
 		} else {
 			const orderData = {
 				line_items: checkoutToken.live.line_items,
+				// customer keys have to be lower case:
 				customer: { firstname: shippingData.firstName, lastname: shippingData.lastName, email: shippingData.email },
 				shipping: {
 					name: 'International',
@@ -40,6 +43,7 @@ const PaymentForm = ({ checkoutToken, nextStep, backStep, shippingData, onCaptur
 				},
 			};
 
+			// Checkout the order:
 			onCaptureCheckout(checkoutToken.id, orderData);
 
 			nextStep();
