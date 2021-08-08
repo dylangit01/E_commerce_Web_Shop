@@ -48,17 +48,17 @@ const AddressForm = ({ checkoutToken, next }) => {
 
 	// Fetch countries first:
 	useEffect(() => {
-		fetchShippingCountries(checkoutToken.id);
+		return fetchShippingCountries(checkoutToken.id);
 	}, [checkoutToken.id]);
 
 	// Only when we got the country, then fetch the subdivisions
 	useEffect(() => {
-		if (shippingCountry) fetchSubdivisions(shippingCountry);
+		if (shippingCountry) return fetchSubdivisions(shippingCountry);
 	}, [shippingCountry]);
 
 	// Only when we got the shippingSubdivision, then fetch the shipping options
 	useEffect(() => {
-		if (shippingSubdivision) fetchShippingOptions(checkoutToken.id, shippingCountry, shippingSubdivision);
+		if (shippingSubdivision) return fetchShippingOptions(checkoutToken.id, shippingCountry, shippingSubdivision);
 	}, [shippingSubdivision, checkoutToken.id, shippingCountry]);
 
 	return (
