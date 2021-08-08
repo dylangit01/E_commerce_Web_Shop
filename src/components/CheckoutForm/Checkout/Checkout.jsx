@@ -21,7 +21,7 @@ const steps = ['Shipping address', 'Payment details'];
 
 const Checkout = ({ cart, onCaptureCheckout, order, error }) => {
 	// const [checkoutToken, setCheckoutToken] = useState(null);
-	// const [activeStep, setActiveStep] = useState(0);
+	const [activeStep, setActiveStep] = useState(0);
 	// const [shippingData, setShippingData] = useState({});
 	const classes = useStyles();
 	// const history = useHistory();
@@ -50,6 +50,12 @@ const Checkout = ({ cart, onCaptureCheckout, order, error }) => {
 
 	// 	nextStep();
 	// };
+
+	const Confirmation = () => (
+		<div>
+			Confirmation
+		</div>
+	)
 
 	// let Confirmation = () =>
 	// 	order.customer ? (
@@ -84,18 +90,23 @@ const Checkout = ({ cart, onCaptureCheckout, order, error }) => {
 	// 	);
 	// }
 
-	// const Form = () =>
-	// 	activeStep === 0 ? (
-	// 		<AddressForm checkoutToken={checkoutToken} nextStep={nextStep} setShippingData={setShippingData} test={test} />
-	// 	) : (
-	// 		<PaymentForm
-	// 			checkoutToken={checkoutToken}
-	// 			nextStep={nextStep}
-	// 			backStep={backStep}
-	// 			shippingData={shippingData}
-	// 			onCaptureCheckout={onCaptureCheckout}
-	// 		/>
-	// 	);
+	const Form = () =>
+		activeStep === 0 ? (
+			<AddressForm
+				// checkoutToken={checkoutToken}
+				// nextStep={nextStep}
+				// setShippingData={setShippingData}
+				// test={test}
+			/>
+		) : (
+			<PaymentForm
+				// checkoutToken={checkoutToken}
+				// nextStep={nextStep}
+				// backStep={backStep}
+				// shippingData={shippingData}
+				// onCaptureCheckout={onCaptureCheckout}
+			/>
+		);
 
 	return (
 		<>
@@ -104,14 +115,16 @@ const Checkout = ({ cart, onCaptureCheckout, order, error }) => {
 			<main className={classes.layout}>
 				<Paper className={classes.paper}>
 					<Typography variant='h4' align='center'> Checkout </Typography>
-					<Stepper activeStep={0} className={classes.stepper}>
+					<Stepper activeStep={activeStep} className={classes.stepper}>
 						{steps.map((label) => (
-							<Step key={label}>
+							<Step key={label}> 
 								<StepLabel>{label}</StepLabel>
 							</Step>
 						))}
 					</Stepper>
-					{/* {activeStep === steps.length ? <Confirmation /> : checkoutToken && <Form />} */}
+					{activeStep === steps.length ? <Confirmation /> : 
+						// checkoutToken &&
+						<Form />}
 				</Paper>
 			</main>
 		</>
